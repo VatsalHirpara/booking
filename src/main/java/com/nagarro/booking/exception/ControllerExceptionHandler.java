@@ -1,4 +1,4 @@
-package com.nagarro.booking.controller;
+package com.nagarro.booking.exception;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +15,7 @@ import com.nagarro.booking.dto.ResponseTO;
 public class ControllerExceptionHandler {
 
 	@ExceptionHandler(Exception.class)
-	@ResponseStatus(HttpStatus.NOT_FOUND)
+	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	public ResponseEntity<ResponseTO<String>> processExceptionHandler(Exception ex) {
 		ResponseTO<String> errorMessageTOResponseTO = new ResponseTO<>();
 		errorMessageTOResponseTO.setError(true);
@@ -23,6 +23,6 @@ public class ControllerExceptionHandler {
 		Error error = new Error(ex.getMessage());
 		errors.add(error);
 		errorMessageTOResponseTO.setErrors(errors);
-		return new ResponseEntity<>(errorMessageTOResponseTO, HttpStatus.NOT_FOUND);
+		return new ResponseEntity<>(errorMessageTOResponseTO, HttpStatus.BAD_REQUEST);
 	}
 }
