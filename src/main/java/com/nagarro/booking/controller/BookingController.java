@@ -46,9 +46,12 @@ public class BookingController {
 		return new ResponseEntity<ResponseTO<String>>(response, HttpStatus.CREATED);
 	}
 
-	@PostMapping("/assign-worker")
-	public ResponseEntity<ResponseTO<Booking>> assignWorker(@RequestBody BookingReqDto bookingReqDto) {
+	@PostMapping("/book-service")
+	public ResponseEntity<ResponseTO<Booking>> assignWorker(@RequestBody BookingReqDto bookingReqDto) throws Exception {
 		ResponseTO<Booking> response = new ResponseTO<>();
+
+		Booking booking = bookingService.bookService(bookingReqDto);
+		response.setData(booking);
 
 		return ResponseEntity.ok(response);
 	}
