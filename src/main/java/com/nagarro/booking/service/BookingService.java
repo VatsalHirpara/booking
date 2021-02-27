@@ -2,17 +2,19 @@ package com.nagarro.booking.service;
 
 import java.util.List;
 
-import com.nagarro.booking.domain.Booking;
+import com.nagarro.booking.domain.BookingEntity;
 import com.nagarro.booking.dto.BookingReqDto;
 
 public interface BookingService {
 
-	List<Booking> getAllBookings();
+	List<BookingEntity> getAllBookings();
 
-	Booking getBookingById(String bookingId) throws Exception;
+	BookingEntity getBookingById(String bookingId) throws Exception;
 
-	String addBooking(Booking booking);
+	String addBooking(BookingEntity bookingEntity);
 
-	Booking bookService(BookingReqDto bookingReqDto) throws Exception;
+	BookingEntity bookService(BookingReqDto bookingReqDto) throws Exception;
+
+	void updateBooking(BookingEntity bookingEntity) throws Exception;
 
 }

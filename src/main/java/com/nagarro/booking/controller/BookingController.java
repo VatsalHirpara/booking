@@ -8,11 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.nagarro.booking.domain.Booking;
+import com.nagarro.booking.domain.BookingEntity;
 import com.nagarro.booking.dto.BookingReqDto;
 import com.nagarro.booking.dto.ResponseTO;
 import com.nagarro.booking.service.BookingService;
@@ -25,34 +26,42 @@ public class BookingController {
 	BookingService bookingService;
 
 	@GetMapping
-	public List<Booking> getAllBookings() {
+	public List<BookingEntity> getAllBookings() {
 		return bookingService.getAllBookings();
 	}
 
 	@GetMapping("/{bookingId}")
-	public ResponseEntity<ResponseTO<Booking>> getBookingById(@PathVariable("bookingId") String bookingId)
+	public ResponseEntity<ResponseTO<BookingEntity>> getBookingById(@PathVariable("bookingId") String bookingId)
 			throws Exception {
-		ResponseTO<Booking> response = new ResponseTO<>();
-		Booking booking = bookingService.getBookingById(bookingId);
-		response.setData(booking);
+		ResponseTO<BookingEntity> response = new ResponseTO<>();
+		BookingEntity bookingEntity = bookingService.getBookingById(bookingId);
+		response.setData(bookingEntity);
 		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping
-	public ResponseEntity<ResponseTO<String>> addBooking(@RequestBody Booking booking) throws Exception {
+	public ResponseEntity<ResponseTO<String>> addBooking(@RequestBody BookingEntity bookingEntity) throws Exception {
 		ResponseTO<String> response = new ResponseTO<>();
-		String bookingId = bookingService.addBooking(booking);
+		String bookingId = bookingService.addBooking(bookingEntity);
 		response.setData("Created with bookingId: " + bookingId);
 		return new ResponseEntity<ResponseTO<String>>(response, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/book-service")
-	public ResponseEntity<ResponseTO<Booking>> assignWorker(@RequestBody BookingReqDto bookingReqDto) throws Exception {
-		ResponseTO<Booking> response = new ResponseTO<>();
+	public ResponseEntity<ResponseTO<BookingEntity>> assignWorker(@RequestBody BookingReqDto bookingReqDto) throws Exception {
+		ResponseTO<BookingEntity> response = new ResponseTO<>();
 
-		Booking booking = bookingService.bookService(bookingReqDto);
-		response.setData(booking);
+		BookingEntity bookingEntity = bookingService.bookService(bookingReqDto);
+		response.setData(bookingEntity);
 
+		return ResponseEntity.ok(response);
+	}
+	
+	@PutMapping
+	public ResponseEntity<ResponseTO<String>> assignWorker(@RequestBody BookingEntity bookingEntity) throws Exception {
+		ResponseTO<String> response = new ResponseTO<>();
+		bookingService.updateBooking(bookingEntity);
+		response.setData("Success");
 		return ResponseEntity.ok(response);
 	}
 

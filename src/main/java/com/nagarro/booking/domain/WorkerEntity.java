@@ -1,8 +1,5 @@
 package com.nagarro.booking.domain;
 
-import java.time.LocalDateTime;
-
-import com.nagarro.booking.enums.BookingStatus;
 import com.nagarro.booking.enums.ServiceCategory;
 import com.nagarro.booking.enums.ServiceName;
 
@@ -13,23 +10,20 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Booking {
+public class WorkerEntity {
+	private Integer id;
 
-	private String id;
+	private String name;
 
-	private BookingStatus bookingStatus = BookingStatus.PROCESSING;
+	private String email;
 
-	private Integer customerId;
+	private String city;
 
-	private Integer workerId;
-
-	private String workerName;
-
-	private Integer serviceId;
-
+	/**
+	 * area of expertise 
+	 */
 	private ServiceCategory serviceCategory;
-
+	
 	private ServiceName serviceName;
 
-	private LocalDateTime serviceTime;
 }
