@@ -3,7 +3,6 @@ package com.nagarro.booking.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -39,16 +38,9 @@ public class BookingController {
 		return ResponseEntity.ok(response);
 	}
 
-	@PostMapping
-	public ResponseEntity<ResponseTO<String>> addBooking(@RequestBody BookingEntity bookingEntity) throws Exception {
-		ResponseTO<String> response = new ResponseTO<>();
-		String bookingId = bookingService.addBooking(bookingEntity);
-		response.setData("Created with bookingId: " + bookingId);
-		return new ResponseEntity<ResponseTO<String>>(response, HttpStatus.CREATED);
-	}
-
 	@PostMapping("/book-service")
-	public ResponseEntity<ResponseTO<BookingEntity>> assignWorker(@RequestBody BookingReqDto bookingReqDto) throws Exception {
+	public ResponseEntity<ResponseTO<BookingEntity>> assignWorker(@RequestBody BookingReqDto bookingReqDto)
+			throws Exception {
 		ResponseTO<BookingEntity> response = new ResponseTO<>();
 
 		BookingEntity bookingEntity = bookingService.bookService(bookingReqDto);
@@ -56,7 +48,7 @@ public class BookingController {
 
 		return ResponseEntity.ok(response);
 	}
-	
+
 	@PutMapping
 	public ResponseEntity<ResponseTO<String>> assignWorker(@RequestBody BookingEntity bookingEntity) throws Exception {
 		ResponseTO<String> response = new ResponseTO<>();

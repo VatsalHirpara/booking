@@ -11,8 +11,6 @@ public interface BookingService {
 
 	BookingEntity getBookingById(String bookingId) throws Exception;
 
-	String addBooking(BookingEntity bookingEntity);
-
 	BookingEntity bookService(BookingReqDto bookingReqDto) throws Exception;
 
 	void updateBooking(BookingEntity bookingEntity) throws Exception;

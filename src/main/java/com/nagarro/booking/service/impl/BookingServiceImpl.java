@@ -70,13 +70,6 @@ public class BookingServiceImpl implements BookingService {
 	}
 
 	@Override
-	public String addBooking(BookingEntity bookingEntity) {
-		bookingEntity.setId(UUID.randomUUID().toString());
-		this.bookingsList.add(bookingEntity);
-		return bookingEntity.getId();
-	}
-
-	@Override
 	public BookingEntity bookService(BookingReqDto bookingReqDto) throws Exception {
 		InstanceInfo instance = eurekaClient.getNextServerFromEureka("apigateway", false);
 		veifyPayment(bookingReqDto.getCustomerId());
