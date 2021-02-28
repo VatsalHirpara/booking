@@ -39,7 +39,7 @@ public class BookingController {
 	}
 
 	@PostMapping("/book-service")
-	public ResponseEntity<ResponseTO<BookingEntity>> assignWorker(@RequestBody BookingReqDto bookingReqDto)
+	public ResponseEntity<ResponseTO<BookingEntity>> bookService(@RequestBody BookingReqDto bookingReqDto)
 			throws Exception {
 		ResponseTO<BookingEntity> response = new ResponseTO<>();
 
